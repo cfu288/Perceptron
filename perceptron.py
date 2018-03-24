@@ -1,5 +1,3 @@
-from nltk.stem.porter import * 
-
 class Perceptron():
 
     def __init__(self, learningRate, featureVectorIn={}):
@@ -8,39 +6,19 @@ class Perceptron():
         self.weightVector = {} # dict
         self.n = learningRate
 
-    def initFeatures(self,trainedBoW):
-        self.featureVector = trainedBoW
-        self.featureVector["THRESHOLD"] = 1 # setting a W0 bias
-
-    def initWeights(self):
+    # Don't need to explicitly set, set while training
+    #def initFeatures(self,trainedBoW):
+    #    self.featureVector = trainedBoW
+    #    self.featureVector["THRESHOLD"] = 1 # setting a W0 bias
+    #def initWeights(self):
         #initialize weights to size of input vector, init to 0 instead of random
-        self.weightVector = {x:0 for x in featureVector.keys()}
+    #    self.weightVector = {x:0 for x in featureVector.keys()}
 
     def classify(self, inputDict):
         #given an input attr dict from a test email, classify it 
         wxArr = []
         for key in inputDict.keys():
-            wxArr.append(featureVector[kdef stemDoc(docDir,stopWords=""):
-    stopWordsL = []
-    if stopWords != "":
-        with open(stopWords,'r', encoding='utf-8', errors='ignore') as stopFile:
-            for line in stopFile:
-                for word in line.split():
-                    stopWordsL.append(word.lower())
-     
-    unstemmed_words_list = []
-    regex = re.compile('[^a-zA-Z0-9]')
-    with open(docDir,'r',encoding='utf-8', errors='ignore') as openFile:
-        for line in openFile:
-            for word in line.split():
-                if word not in stopWords:
-                    cleaned = regex.sub('', word)
-                    if len(cleaned) > 0:
-                        unstemmed_words_list.append(cleaned.lower())
-    #print(unstemmed_words_list)
-    stemmer = PorterStemmer()
-    stemmed_words_list = [stemmer.stem(plural) for plural in unstemmed_words_list]
- ey]*weightVector[key])
+            wxArr.append(featureVector[key]*weightVector[key])
         res = sum(wxArr)
         return 1 if res >1 else 0
            
@@ -55,10 +33,49 @@ class Perceptron():
             we are updating the weight wi for
         '''
         for doc in os.listdir(dir):
-            
+            stemmedDoc = stemDoc(dir+doc)
+            bag = initBagFromList(stemmedDoc)
+            for key,value in bag.items():
+                if key in self.featureVector:
+                    # w inc by 1
+                else:
+                    # add entry in fV, set w to 1
+                
         pass
 
-    def stemDoc(self, docDir,stopWords=""):
+    def initBagFromList(doclist):
+        ''' (list) -> dict
+
+            Given the name of a stemmed list (doclist) generated from 
+            a single email, convert the document into a bag of 
+            words stored as a dictionary and return the bag.
+        '''
+        d = {}
+        for word in doclist:
+            if not word in d:
+                d[word] = 1
+            else:
+                d[word] += 1
+        return d
+
+    def initBagFromFile(st):
+        ''' (string) -> dict
+
+            Given the name of a stemmed text file (st) generated from 
+            all of the st files, convert the document into a bag of 
+            words stored as a dictionary and return the bag
+        '''
+        d = {}
+        with open(st,'r') as openFile:
+            for line in openFile:
+                for word in line.split():
+                    if not word in d:
+                        d[word] = 1
+                    else:
+                        d[word] += 1
+        return d
+
+    def stemDoc(self, docPath,stopWords=""):
         stopWordsL = []
         if stopWords != "":
             with open(stopWords,'r', encoding='utf-8', errors='ignore') as stopFile:
@@ -68,7 +85,7 @@ class Perceptron():
          
         unstemmed_words_list = []
         regex = re.compile('[^a-zA-Z0-9]')
-        with open(docDir,'r',encoding='utf-8', errors='ignore') as openFile:
+        with open(docPath,'r',encoding='utf-8', errors='ignore') as openFile:
             for line in openFile:
                 for word in line.split():
                     if word not in stopWords:
