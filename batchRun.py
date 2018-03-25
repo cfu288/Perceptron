@@ -16,34 +16,36 @@ if __name__ == "__main__":
 
     #combos of epochs and learning rates
     COMBOS = [
-    (5,.1),(10,.1),(50,.1),(100,.1),(200,.1),
-    (5,.05),(10,.05),(50,.05),(100,.05),(200,.05),
-    (5,.2),(10,.2),(50,.2),(100,.2),(200,.2),
-    (5,.3),(10,.3),(50,.3),(100,.3),(200,.3),
+    (5,.01),(10,.01),(50,.01),(100,.01),(200,.01),
+    #(5,.1),(10,.1),(50,.1),(100,.1),(200,.1),
+    #(5,.05),(10,.05),(50,.05),(100,.05),(200,.05),
+    #(5,.2),(10,.2),(50,.2),(100,.2),(200,.2),
+    #(5,.3),(10,.3),(50,.3),(100,.3),(200,.3),
+    #(1000,.1),(1000,.05),(1000,.2),(1000,.3),(1000,.01),
     ]
     results = []
 
-    i = 0
-    for epoch,lr in COMBOS:
-        i+=1
-        print("{}/{}".format(i,len(COMBOS)), end="\r")
+    with open("results.txt", 'a') as outFile:
+        i = 0
+        for epoch,lr in COMBOS:
+            i+=1
+            print("{}/{}".format(i,len(COMBOS)), end="\r")
 
-
-        p = Perceptron(lr)
-        p.initFeatures(mergedBag)
-        p.initWeights()
-    
-        for j in range(epoch):
-            trainWithFiles(p, 1, trainHamDir)
-            trainWithFiles(p, -1, trainSpamDir)
+            p = Perceptron(lr)
+            p.initFeatures(mergedBag)
+            p.initWeights()
         
-        hamTest = testWithFiles(p, 1, testHamDir)
-        spamTest = testWithFiles(p, -1, testSpamDir)
+            for j in range(epoch):
+                trainWithFiles(p, 1, trainHamDir)
+                trainWithFiles(p, -1, trainSpamDir)
+            
+            hamTest = testWithFiles(p, 1, testHamDir)
+            spamTest = testWithFiles(p, -1, testSpamDir)
+            
+            percCor = (hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])
+            
+            #results.append((epoch,lr,percCor))
         
-        percCor = (hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])
-        
-        results.append((epoch,lr,percCor))
-    
-    with open("results.txt", 'w') as outFile:
-        for x,y,z in results:
-            outFile.write("{} epoches with learning rate {} has {} correct\n".format(x,y,z))
+            #for x,y,z in results:
+            #write for each itr so something is saved if the proc is killed over ssh
+            outFile.write("{} epoches with learning rate {} has {} correct\n".format(epoch,lr,percCor))

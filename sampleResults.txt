@@ -1,0 +1,18 @@
+5 epoches with learning rate 0.1 has 0.5666666666666667 correct
+10 epoches with learning rate 0.1 has 0.7333333333333333 correct
+50 epoches with learning rate 0.1 has 0.8 correct100 epoches with learning rate 0.1 has 0.7666666666666667 correct
+200 epoches with learning rate 0.1 has 0.8 correct5 epoches with learning rate 0.05 has 0.7 correct
+10 epoches with learning rate 0.05 has 0.7333333333333333 correct
+50 epoches with learning rate 0.05 has 0.7666666666666667 correct
+100 epoches with learning rate 0.05 has 0.7666666666666667 correct
+200 epoches with learning rate 0.05 has 0.8 correct
+5 epoches with learning rate 0.2 has 0.6666666666666666 correct
+10 epoches with learning rate 0.2 has 0.7333333333333333 correct
+50 epoches with learning rate 0.2 has 0.7333333333333333 correct
+100 epoches with learning rate 0.2 has 0.7 correct
+200 epoches with learning rate 0.2 has 0.7333333333333333 correct
+5 epoches with learning rate 0.3 has 0.6 correct
+10 epoches with learning rate 0.3 has 0.7333333333333333 correct
+50 epoches with learning rate 0.3 has 0.7333333333333333 correct
+100 epoches with learning rate 0.3 has 0.8333333333333334 correct
+200 epoches with learning rate 0.3 has 0.8666666666666667 correct
