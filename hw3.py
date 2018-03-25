@@ -1,5 +1,6 @@
 from perceptron import Perceptron
-from nltk.stem.porter import * 
+from nltk.stem.porter import *
+from stemmer import stemDoc
 from collections import Counter
 import argparse, os, re
 
@@ -52,27 +53,6 @@ def initBagFromFile(st):
             c.update(l)
     return c
 
-def stemDoc(docPath,stopWords=""):
-    stopWordsL = []
-    if stopWords != "":
-        with open(stopWords,'r', encoding='utf-8', errors='ignore') as stopFile:
-            for line in stopFile:
-                for word in line.split():
-                    stopWordsL.append(word.lower())
-     
-    unstemmed_words_list = []
-    regex = re.compile('[^a-zA-Z0-9]')
-    with open(docPath,'r',encoding='utf-8', errors='ignore') as openFile:
-        for line in openFile:
-            for word in line.split():
-                if word not in stopWords:
-                    cleaned = regex.sub('', word)
-                    if len(cleaned) > 0:
-                        unstemmed_words_list.append(cleaned.lower())
-    stemmer = PorterStemmer()
-    stemmed_words_list = [stemmer.stem(plural) for plural in unstemmed_words_list]
-    return stemmed_words_list
-
 def trainWithFiles(p, target, dir):
     ''' (perceptron object, int, string) -> None
         
@@ -119,12 +99,12 @@ if __name__ == "__main__":
     epoch = 100
     print("TRAINING")
     for i in range(epoch):
+        #Train with entire dataset
         print("{}/{}".format(i+1,epoch), end="\r")
         trainWithFiles(p, 1, trainHamDir)
         trainWithFiles(p, -1, trainSpamDir)
 
-    print("\n------------TESTING HAM--------------")
+    print("TESTING")
     hamTest = testWithFiles(p, 1, testHamDir)
-    print("\n-----------TESTING SPAM--------------")
     spamTest = testWithFiles(p, -1, testSpamDir)
     print("PERCENT CORRECT {}".format((hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])))
