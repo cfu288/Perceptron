@@ -36,11 +36,8 @@ Results of perceptron tests are shown below, where I varied the learning rate (b
 
 ![Accuracy of perceptron given different learning rates and epoches](results/graphResults.png)
 
-Repeated same tests as above, but removed stopwords from emails. We can immediately see a large improvement when compared to the graph above with lower epoches and a slight improvement in the higher epoches:
+* Numerical Results if **NO** stopwords are removed:
 
-![Stopwords accuracy of perceptron given different learning rates and epoches](results/stemmedGraphResults.png)
-
-Numerical Results if **NO** stopwords are removed:
     * 5 epoches with learning rate 0.01 has 0.3117154811715481 correct
     * 10 epoches with learning rate 0.01 has 0.4602510460251046 correct
     * 50 epoches with learning rate 0.01 has 0.6527196652719666 correct
@@ -72,7 +69,13 @@ Numerical Results if **NO** stopwords are removed:
     * 200 epoches with learning rate 0.3 has 0.8577405857740585 correct
     * 1000 epoches with learning rate 0.3 has 0.899581589958159 correct
 
-Numerical Results if stopwords **ARE** removed:
+
+I then repeated same tests as above, but removed stopwords from emails. We can immediately see a large improvement with lower epoches and a slight improvement in the higher epoches:
+
+![Stopwords accuracy of perceptron given different learning rates and epoches](results/stemmedGraphResults.png)
+
+* Numerical Results if stopwords **ARE** removed:
+
     * 5 epoches with learning rate 0.01 has 0.5899581589958159 correct
     * 10 epoches with learning rate 0.01 has 0.6150627615062761 correct
     * 50 epoches with learning rate 0.01 has 0.5355648535564853 correct
@@ -103,4 +106,5 @@ Numerical Results if stopwords **ARE** removed:
     * 100 epoches with learning rate 0.3 has 0.7928870292887029 correct
     * 200 epoches with learning rate 0.3 has 0.803347280334728 correct
     * 1000 epoches with learning rate 0.3 has 0.9163179916317992 correct
-    * 
+ 
+ Overall, rates are still lower than my previous Nieve Bayes classifier but higher than my Logistic Regression classifier (My logistic regression implementations had issues though, so not a fair comparision). Removing stopwords showed a noticible improvement with the perceptron, while with my NB and LR implementations improvements were minimal.
