@@ -15,8 +15,8 @@ class Perceptron():
     
     # Initialize weights to size of input vector, init to 0.01 instead of random
     def initWeights(self):
-        self.weightVector = {x:random.uniform(-1,1) for x in self.featureVector.keys()}
-        self.weightVector["__BIAS__"] = 0 #
+        self.weightVector = {x:random.uniform(-.25,.25) for x in self.featureVector.keys()}
+        self.weightVector["__BIAS__"] = 1 #need to ensure always == 1
 
     #given an input attr counter from a test email, classify it 
     def classify(self, inputDict):
@@ -31,7 +31,7 @@ class Perceptron():
                 #print("\300[91m 0 \033[0m", end = "")
                 pass
         #Should be able to just replace with 1
-        wxArr.append(self.featureVector["__BIAS__"]*self.weightVector["__BIAS__"])
+        wxArr.append(1)
         res = sum(wxArr)
         #print("{}".format(res))
         #print("{} = {}".format(wxArr,res))
@@ -50,15 +50,11 @@ class Perceptron():
             we are updating the weight wi for.
         '''
         o = self.classify(inputDict) # pre-calc, doesn't change per email
-        #Adjust Bias
-        deltaWI = self.n * ( target - o ) * self.featureVector["__BIAS__"]
-        self.weightVector["__BIAS__"] += deltaWI
-
         for key in inputDict.keys():
             try:
                 deltaWI = self.n * ( target - o ) * self.featureVector[key]
-                #if self.featureVector[key] != 0:
-                    #print("{} \t delta:{:.5f}, targ:{}, o:{}, fV:{}".format(key, deltaWI, target, o, self.featureVector[key]))
+                if self.featureVector[key]:
+                    print("delta:{:.5f}, targ:{}, o:{}, fV:{}".format(deltaWI, target, o, self.featureVector[key]))
                 self.weightVector[key] += deltaWI
             except KeyError as e:
                 #key not found? Should not happen since Perceptron attr are set before training

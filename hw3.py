@@ -74,7 +74,7 @@ def stemDoc(docPath,stopWords=""):
     return stemmed_words_list
 
 def trainWithFiles(p, target, dir):
-    ''' (perceptron object, string) -> None
+    ''' (perceptron object, int, string) -> None
         
         Given an perceptron object and a directory path where the emails are, train
         the perceptron with emails. Target is 1 if emails are ham, -1 if they are spam.
@@ -95,7 +95,7 @@ def testWithFiles(p, target, dir):
         #print("{}=?={}".format(ans,target))
         if ans == target:
             numCorrect += 1
-    print("{} correct out of {}".format(numCorrect, total))        
+    #print("{} correct out of {}".format(numCorrect, total))        
     return (numCorrect,total)
 
 if __name__ == "__main__":
@@ -115,14 +115,16 @@ if __name__ == "__main__":
     p = Perceptron(.1)
     p.initFeatures(mergedBag)
     p.initWeights()
+   
+    epoch = 100
+    print("TRAINING")
+    for i in range(epoch):
+        print("{}/{}".format(i+1,epoch), end="\r")
+        trainWithFiles(p, 1, trainHamDir)
+        trainWithFiles(p, -1, trainSpamDir)
 
-    print("------------TRAINING HAM------------")
-    trainWithFiles(p, 1, trainHamDir)
-    #print("\n----------TRAINING SPAM-----------")
-    #trainWithFiles(p, -1, trainSpamDir)
-
-    #print("\n------------TESTING HAM--------------")
-    #hamTest = testWithFiles(p, 1, testHamDir)
-    #print("\n-----------TESTING SPAM--------------")
-    #spamTest = testWithFiles(p, -1, testSpamDir)
-    #print("PERCENT CORRECT {}".format((hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])))
+    print("\n------------TESTING HAM--------------")
+    hamTest = testWithFiles(p, 1, testHamDir)
+    print("\n-----------TESTING SPAM--------------")
+    spamTest = testWithFiles(p, -1, testSpamDir)
+    print("PERCENT CORRECT {}".format((hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])))
