@@ -36,34 +36,71 @@ Results of perceptron tests are shown below, where I varied the learning rate (b
 
 ![Accuracy of perceptron given different learning rates and epoches](results/graphResults.png)
 
-Numerical Results:
-    5 epoches with learning rate 0.01 has 0.3117154811715481 correct
-    10 epoches with learning rate 0.01 has 0.4602510460251046 correct
-    50 epoches with learning rate 0.01 has 0.6527196652719666 correct
-    100 epoches with learning rate 0.01 has 0.6820083682008368 correct
-    200 epoches with learning rate 0.01 has 0.8326359832635983 correct
-    1000 epoches with learning rate 0.01 has 0.895397489539749 correct
-    5 epoches with learning rate 0.05 has 0.2928870292887029 correct
-    10 epoches with learning rate 0.05 has 0.4686192468619247 correct
-    50 epoches with learning rate 0.05 has 0.6234309623430963 correct
-    100 epoches with learning rate 0.05 has 0.5983263598326359 correct
-    200 epoches with learning rate 0.05 has 0.8138075313807531 correct
-    5 epoches with learning rate 0.1 has 0.44142259414225943 correct
-    10 epoches with learning rate 0.1 has 0.3702928870292887 correct
-    50 epoches with learning rate 0.1 has 0.6317991631799164 correct
-    100 epoches with learning rate 0.1 has 0.6569037656903766 correct
-    200 epoches with learning rate 0.1 has 0.8765690376569037 correct
-    1000 epoches with learning rate 0.1 has 0.893305439330544 correct
-    1000 epoches with learning rate 0.05 has 0.8891213389121339 correct
-    5 epoches with learning rate 0.2 has 0.2907949790794979 correct
-    10 epoches with learning rate 0.2 has 0.47280334728033474 correct
-    50 epoches with learning rate 0.2 has 0.6171548117154811 correct
-    100 epoches with learning rate 0.2 has 0.6861924686192469 correct
-    200 epoches with learning rate 0.2 has 0.8619246861924686 correct
-    1000 epoches with learning rate 0.2 has 0.895397489539749 correct
-    5 epoches with learning rate 0.3 has 0.4456066945606695 correct
-    10 epoches with learning rate 0.3 has 0.4895397489539749 correct
-    50 epoches with learning rate 0.3 has 0.5711297071129707 correct
-    100 epoches with learning rate 0.3 has 0.6652719665271967 correct
-    200 epoches with learning rate 0.3 has 0.8577405857740585 correct
-    1000 epoches with learning rate 0.3 has 0.899581589958159 correct
+Repeated same tests as above, but removed stopwords from emails. We can immediately see a large improvement when compared to the graph above with lower epoches and a slight improvement in the higher epoches:
+
+![Stopwords accuracy of perceptron given different learning rates and epoches](results/stemmedGraphResults.png)
+
+Numerical Results if **NO** stopwords are removed:
+    * 5 epoches with learning rate 0.01 has 0.3117154811715481 correct
+    * 10 epoches with learning rate 0.01 has 0.4602510460251046 correct
+    * 50 epoches with learning rate 0.01 has 0.6527196652719666 correct
+    * 100 epoches with learning rate 0.01 has 0.6820083682008368 correct
+    * 200 epoches with learning rate 0.01 has 0.8326359832635983 correct
+    * 1000 epoches with learning rate 0.01 has 0.895397489539749 correct
+    * 5 epoches with learning rate 0.05 has 0.2928870292887029 correct
+    * 10 epoches with learning rate 0.05 has 0.4686192468619247 correct
+    * 50 epoches with learning rate 0.05 has 0.6234309623430963 correct
+    * 100 epoches with learning rate 0.05 has 0.5983263598326359 correct
+    * 200 epoches with learning rate 0.05 has 0.8138075313807531 correct
+    * 5 epoches with learning rate 0.1 has 0.44142259414225943 correct
+    * 10 epoches with learning rate 0.1 has 0.3702928870292887 correct
+    * 50 epoches with learning rate 0.1 has 0.6317991631799164 correct
+    * 100 epoches with learning rate 0.1 has 0.6569037656903766 correct
+    * 200 epoches with learning rate 0.1 has 0.8765690376569037 correct
+    * 1000 epoches with learning rate 0.1 has 0.893305439330544 correct
+    * 1000 epoches with learning rate 0.05 has 0.8891213389121339 correct
+    * 5 epoches with learning rate 0.2 has 0.2907949790794979 correct
+    * 10 epoches with learning rate 0.2 has 0.47280334728033474 correct
+    * 50 epoches with learning rate 0.2 has 0.6171548117154811 correct
+    * 100 epoches with learning rate 0.2 has 0.6861924686192469 correct
+    * 200 epoches with learning rate 0.2 has 0.8619246861924686 correct
+    * 1000 epoches with learning rate 0.2 has 0.895397489539749 correct
+    * 5 epoches with learning rate 0.3 has 0.4456066945606695 correct
+    * 10 epoches with learning rate 0.3 has 0.4895397489539749 correct
+    * 50 epoches with learning rate 0.3 has 0.5711297071129707 correct
+    * 100 epoches with learning rate 0.3 has 0.6652719665271967 correct
+    * 200 epoches with learning rate 0.3 has 0.8577405857740585 correct
+    * 1000 epoches with learning rate 0.3 has 0.899581589958159 correct
+
+Numerical Results if stopwords **ARE** removed:
+    * 5 epoches with learning rate 0.01 has 0.5899581589958159 correct
+    * 10 epoches with learning rate 0.01 has 0.6150627615062761 correct
+    * 50 epoches with learning rate 0.01 has 0.5355648535564853 correct
+    * 100 epoches with learning rate 0.01 has 0.606694560669456 correct
+    * 200 epoches with learning rate 0.01 has 0.8661087866108786 correct
+    * 1000 epoches with learning rate 0.01 has 0.9246861924686193 correct
+    * 5 epoches with learning rate 0.05 has 0.5209205020920502 correct
+    * 10 epoches with learning rate 0.05 has 0.6799163179916318 correct
+    * 50 epoches with learning rate 0.05 has 0.7573221757322176 correct
+    * 100 epoches with learning rate 0.05 has 0.7907949790794979 correct
+    * 200 epoches with learning rate 0.05 has 0.8410041841004184 correct
+    * 1000 epoches with learning rate 0.05 has 0.9079497907949791 correct
+    * 5 epoches with learning rate 0.1 has 0.5230125523012552 correct
+    * 10 epoches with learning rate 0.1 has 0.5983263598326359 correct
+    * 50 epoches with learning rate 0.1 has 0.7280334728033473 correct
+    * 100 epoches with learning rate 0.1 has 0.7510460251046025 correct
+    * 200 epoches with learning rate 0.1 has 0.8514644351464435 correct
+    * 1000 epoches with learning rate 0.1 has 0.9079497907949791 correct
+    * 5 epoches with learning rate 0.2 has 0.5230125523012552 correct
+    * 10 epoches with learning rate 0.2 has 0.5125523012552301 correct
+    * 50 epoches with learning rate 0.2 has 0.7740585774058577 correct
+    * 100 epoches with learning rate 0.2 has 0.799163179916318 correct
+    * 200 epoches with learning rate 0.2 has 0.8326359832635983 correct
+    * 1000 epoches with learning rate 0.2 has 0.9163179916317992 correct
+    * 5 epoches with learning rate 0.3 has 0.4686192468619247 correct
+    * 10 epoches with learning rate 0.3 has 0.604602510460251 correct
+    * 50 epoches with learning rate 0.3 has 0.7384937238493724 correct
+    * 100 epoches with learning rate 0.3 has 0.7928870292887029 correct
+    * 200 epoches with learning rate 0.3 has 0.803347280334728 correct
+    * 1000 epoches with learning rate 0.3 has 0.9163179916317992 correct
+    * 

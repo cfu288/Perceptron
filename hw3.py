@@ -53,7 +53,7 @@ def initBagFromFile(st):
             c.update(l)
     return c
 
-def trainWithFiles(p, target, dir, cache=0, prevFiles=None):
+def trainWithFiles(p, target, dir, stopwords="", cache=0, prevFiles=None):
     ''' (perceptron object, int, string) -> None
         
         Given an perceptron object and a directory path where the emails are, train
@@ -64,26 +64,26 @@ def trainWithFiles(p, target, dir, cache=0, prevFiles=None):
     if prevFiles == None and cache==1:
         newL = []
         for doc in os.listdir(dir):
-            stemmedDoc = stemDoc(dir+doc)
+            stemmedDoc = stemDoc(dir+doc,stopwords)
             bag = initBagFromList(stemmedDoc)
             newL.append(bag)
             p.train(target,bag)
         return newL
     elif cache == 0:
         for doc in os.listdir(dir):
-            stemmedDoc = stemDoc(dir+doc)
+            stemmedDoc = stemDoc(dir+doc,stopwords)
             bag = initBagFromList(stemmedDoc)
             p.train(target,bag)
     else:
         for bag in prevFiles:
             p.train(target,bag)
 
-def testWithFiles(p, target, dir):
+def testWithFiles(p, target, dir, stopwords=""):
     total = 0
     numCorrect = 0
     for doc in os.listdir(dir):
         total += 1
-        stemmedDoc = stemDoc(dir+doc)
+        stemmedDoc = stemDoc(dir+doc,stopwords)
         bag = initBagFromList(stemmedDoc)
         ans =  p.classify(bag) 
         #print("{}=?={}".format(ans,target))
@@ -119,13 +119,13 @@ if __name__ == "__main__":
     for i in range(epoch):
         #Train with entire dataset
         print("{}/{}".format(i+1,epoch), end="\r")
-        nCacheH = trainWithFiles(p, 1, trainHamDir, 1, cacheH)
-        nCacheS = trainWithFiles(p, -1, trainSpamDir, 1, cacheS)
+        nCacheH = trainWithFiles(p, 1, trainHamDir, stopWords, 1, cacheH)
+        nCacheS = trainWithFiles(p, -1, trainSpamDir, stopWords, 1, cacheS)
         cacheH = nCacheH if cacheH == None else cacheH
         cacheS = nCacheS if cacheS == None else cacheS
     print("TESTING")
-    hamTest = testWithFiles(p, 1, testHamDir)
-    spamTest = testWithFiles(p, -1, testSpamDir)
+    hamTest = testWithFiles(p, 1, testHamDir,stopWords)
+    spamTest = testWithFiles(p, -1, testSpamDir,stopWords)
     print("PERCENT CORRECT {}".format((hamTest[0]+spamTest[0])/(hamTest[1]+spamTest[1])))
     
     print("Time Elapsed: {} seconds".format(time.time()-start))
