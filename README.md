@@ -30,7 +30,40 @@ Optimized training - After first epoch, Counters made from emails are saved to a
         * dirPath : path of directory you want to convert to a stemmed file
         * outfile : name/path of stemmed file
 
+# Results:
+
 Results of perceptron tests are shown below, where I varied the learning rate (between .01 and .3) and number of epoches (between 5 and 1000):
 
-
 ![Accuracy of perceptron given different learning rates and epoches](results/graphResults.png)
+
+Numerical Results:
+    5 epoches with learning rate 0.01 has 0.3117154811715481 correct
+    10 epoches with learning rate 0.01 has 0.4602510460251046 correct
+    50 epoches with learning rate 0.01 has 0.6527196652719666 correct
+    100 epoches with learning rate 0.01 has 0.6820083682008368 correct
+    200 epoches with learning rate 0.01 has 0.8326359832635983 correct
+    1000 epoches with learning rate 0.01 has 0.895397489539749 correct
+    5 epoches with learning rate 0.05 has 0.2928870292887029 correct
+    10 epoches with learning rate 0.05 has 0.4686192468619247 correct
+    50 epoches with learning rate 0.05 has 0.6234309623430963 correct
+    100 epoches with learning rate 0.05 has 0.5983263598326359 correct
+    200 epoches with learning rate 0.05 has 0.8138075313807531 correct
+    5 epoches with learning rate 0.1 has 0.44142259414225943 correct
+    10 epoches with learning rate 0.1 has 0.3702928870292887 correct
+    50 epoches with learning rate 0.1 has 0.6317991631799164 correct
+    100 epoches with learning rate 0.1 has 0.6569037656903766 correct
+    200 epoches with learning rate 0.1 has 0.8765690376569037 correct
+    1000 epoches with learning rate 0.1 has 0.893305439330544 correct
+    1000 epoches with learning rate 0.05 has 0.8891213389121339 correct
+    5 epoches with learning rate 0.2 has 0.2907949790794979 correct
+    10 epoches with learning rate 0.2 has 0.47280334728033474 correct
+    50 epoches with learning rate 0.2 has 0.6171548117154811 correct
+    100 epoches with learning rate 0.2 has 0.6861924686192469 correct
+    200 epoches with learning rate 0.2 has 0.8619246861924686 correct
+    1000 epoches with learning rate 0.2 has 0.895397489539749 correct
+    5 epoches with learning rate 0.3 has 0.4456066945606695 correct
+    10 epoches with learning rate 0.3 has 0.4895397489539749 correct
+    50 epoches with learning rate 0.3 has 0.5711297071129707 correct
+    100 epoches with learning rate 0.3 has 0.6652719665271967 correct
+    200 epoches with learning rate 0.3 has 0.8577405857740585 correct
+    1000 epoches with learning rate 0.3 has 0.899581589958159 correct
