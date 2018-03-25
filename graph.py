@@ -16,6 +16,8 @@ def best_fit(X, Y):
 
     return a, b
 
+def graphDecisionPlane(p):
+    pass
 
 if __name__ == "__main__":
     

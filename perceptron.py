@@ -1,41 +1,45 @@
 import random
 class Perceptron():
 
-    # Since we need to correlate weights and inputs to specific words, 
-    # we will use a counter for the weights instead of a vector
-    def __init__(self, learningRate, featureVectorIn={}):
-        self.featureVector = featureVectorIn # counter
-        self.weightVector = {} # counter
+    def __init__(self, learningRate):
+        ''' (float) - > None
+            Takes in a learning rate, inits a perceptron object. Since we need to 
+            correlate weights and inputs to specific words, we will use a counter for 
+            the weights instead of a vector
+        '''
+        self.featureVector = None # Will be Counter obj
+        self.weightVector = None # counter
         self.n = learningRate
 
-    # Need to init perceptron with set of attributes and their freq from ALL of the emails (spam and ham)
     def initFeatures(self,trainedBoW):
+        ''' (Counter) -> None
+            Init fV with passed in BoW counter of entire training set, adds a bias of 1 to fV
+        '''
         self.featureVector = trainedBoW
         self.featureVector["__BIAS__"] = 1 # setting a W0 bias
+        
     
-    # Initialize weights to size of input vector, init to 0.01 instead of random
     def initWeights(self):
+        ''' (None) -> None
+            Init wV to random values between-1 to 1 for each attr in fV
+        '''
         self.weightVector = {x:random.uniform(-1,1) for x in self.featureVector.keys()}
-        self.weightVector["__BIAS__"] = 0 #
 
-    #given an input attr counter from a test email, classify it 
     def classify(self, inputDict):
+        ''' (Counter) -> int
+            Provided a Bow from an individual email (as a Counter obj), classify whether
+            it is of calss 1 or -1 given current perceptron training. Classify as 1 if
+            linear combination of weights and attr is > 0, classify as -1 o/w.
+        '''
         wxArr = []
         for key in inputDict.keys():
             try:
                 wxArr.append(self.featureVector[key]*self.weightVector[key])
-                #print("1", end = "")
             except KeyError as e:
                 # Note: KeyErrors should be normal during TESTING but not TRAINING
-                #print("KEY {} not found".format(e))            
-                #print("\300[91m 0 \033[0m", end = "")
                 pass
-        #Should be able to just replace with 1
         wxArr.append(self.featureVector["__BIAS__"]*self.weightVector["__BIAS__"])
         res = sum(wxArr)
-        #print("{}".format(res))
-        #print("{} = {}".format(wxArr,res))
-        #print("{:.3f}".format(res))
         return 1 if res>0 else -1
            
     def train(self, target, inputDict):
@@ -49,7 +53,7 @@ class Perceptron():
             perceptron c(vector(X)) output and target value, and xi is the specific attr
             we are updating the weight wi for.
         '''
-        o = self.classify(inputDict) # pre-calc, doesn't change per email
+        o = self.classify(inputDict) # pre-calc, c(vector(x)) doesn't change per email
         #Adjust Bias
         deltaWI = self.n * ( target - o ) * self.featureVector["__BIAS__"]
         self.weightVector["__BIAS__"] += deltaWI
@@ -57,11 +61,8 @@ class Perceptron():
         for key in inputDict.keys():
             try:
                 deltaWI = self.n * ( target - o ) * self.featureVector[key]
-                #if self.featureVector[key] != 0:
-                    #print("{} \t delta:{:.5f}, targ:{}, o:{}, fV:{}".format(key, deltaWI, target, o, self.featureVector[key]))
                 self.weightVector[key] += deltaWI
             except KeyError as e:
                 #key not found? Should not happen since Perceptron attr are set before training
                 #print("KEY {} not found".format(e))            
                 pass 
-        #print("{}\n".format(self.weightVector))

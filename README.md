@@ -4,6 +4,10 @@ I used python to implement a Perceptron that can train on a set of HAM or SPAM e
 
 Emails were first stemmed using the nltk porter stemmer, then converted into a bag of words (using python's Counter data structure). 
 
+Optimized training - After first epoch, Counters made from emails are saved to a list for future epoches instead of regenerated per epoch. In a sample of 100 iterations, it reduced training runtime from 354 seconds to 11 seconds, essentially cutting down runtime by 97%.
+
+**KNOWN ISSUE** - I currently feed in all of the data from one class first, then all of the other data from the other class second. This is problably leading to lower accuracies. Because the perceptron training algorithm stops learning as soon as it stops making mistakes, it only really benefits from the first few data points from each set as after the first few datapoints the algorithm stops making mistakes as it has trained "just enough" on that current epoch on that set. This means it "converges" quickly without using the whole set. Therefore my epoches are problably inefficent: more epoches are needed for higher accuracies. I am working on randomizing or alternating how I feed in the data to avoid this problem.  
+
 ## Files:
 * **hw3.py** is the driver code. It parses and formats incoming emails that are eventually passed to the perceptron object for either training ot testing. The main code defaults to 100 epoches and a .1 learning rate. To run hw3.py:
 
